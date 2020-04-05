@@ -1,0 +1,6 @@
+__pycache__
+*.pyc
+images/*
+labels.json
+samplesDB.yml
+.pyc
