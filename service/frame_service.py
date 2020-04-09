@@ -1,5 +1,6 @@
 import cv2
 import numpy
+from pytesseract import pytesseract
 
 
 class TrackBar:
@@ -257,3 +258,14 @@ class FrameService:
         kernel = numpy.ones((5, 5), numpy.uint8)
         eroded_frame = cv2.dilate(frame, kernel, iterations=iterations)
         return eroded_frame
+
+    @staticmethod
+    def detect_text_frame(frame: numpy.ndarray) -> numpy.ndarray:
+        kernel = numpy.ones((1, 1), numpy.uint8)
+        frame = cv2.dilate(frame, kernel, iterations=1)
+        frame = cv2.erode(frame, kernel, iterations=1)
+        # frame = cv2.adaptiveThreshold(frame, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
+        cv2.imwrite('tmp.png', frame)
+        result = pytesseract.image_to_string('tmp.png')
+        print(result)
+        return frame

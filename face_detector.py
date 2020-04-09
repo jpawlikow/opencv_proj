@@ -2,8 +2,6 @@ import cv2
 import numpy
 from collections import namedtuple
 
-from service.frame_service import FrameService
-
 
 DetectedObject = namedtuple('DetectedObject', ('frame', 'origin_start', 'origin_end'))
 
